@@ -19,11 +19,14 @@ app.use(koaBody({
 }))
 
 router.get('/', function *(next) {
-  
+
 })
 
 router.get('/cats', function *(next) {
+  const json = fs.readFile('./db.json')
 
+  this.set('Content-Type', 'application/json')
+  this.body = yield json
 })
 
 router.post('/cats', function *(next) {
