@@ -25,7 +25,12 @@ router.get('/', function *(next) {
 
 // get all the cats
 router.get('/cats', function *(next) {
-  const json = fs.readFile('./db.json')
+  const json = JSON.parse(fs.readFileSync('./db.json').toString())
+
+  this.set('Content-Type', 'application/json')
+  this.body = json.cats
+  this.status = 200
+  console.log(json.cats)
 
   this.set('Content-Type', 'application/json')
 })
@@ -36,10 +41,9 @@ router.get('/cats', function *(next) {
 router.get('/cats/:id', function *(next) {
   const json = JSON.parse(fs.readFileSync('./db.json').toString())
 
-  let cats = json.cats
+  const cat = R.filter((cat) => parseInt(cat.id) === parseInt(this.params.id), json.cats)
 
-  const cat = R.filter((cat) => parseInt(cat.id) === parseInt(this.params.id), cats)
-console.log(cat)
+  this.set('Content-Type', 'application/json')
   this.body = cat
   this.status = 200
 })
