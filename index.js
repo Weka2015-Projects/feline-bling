@@ -22,20 +22,20 @@ router.get('/', function *(next) {
 
 })
 
-router.get('/moves', function *(next) {
+router.get('/cats', function *(next) {
 
 })
 
-router.post('/moves', function *(next) {
+router.post('/cats', function *(next) {
 
 })
 
-router.patch('/moves/:id', function *(next) {
+router.patch('/cats/:id', function *(next) {
 
 })
 
-router.delete('/moves/:id', function *(next) {
-  
+router.delete('/cats/:id', function *(next) {
+
 })
 
 app.use(router.routes())
