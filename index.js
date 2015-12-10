@@ -35,9 +35,11 @@ router.patch('/moves/:id', function *(next) {
 })
 
 router.delete('/moves/:id', function *(next) {
-  
+
 })
 
 app.use(router.routes())
 
 app.listen(4000, () => console.log('Listening on port 4000.'))
+
+module.exports = app
