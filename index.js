@@ -19,7 +19,7 @@ app.use(koaBody({
 }))
 
 router.get('/', function *(next) {
-
+  
 })
 
 router.get('/cats', function *(next) {
