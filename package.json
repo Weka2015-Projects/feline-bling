@@ -1,0 +1,34 @@
+{
+  "name": "feline-bling",
+  "version": "1.0.0",
+  "description": "Hey, remember [json-server](https://github.com/typicode/json-server), that lovely little app that converts a simple `db.json` file into a sweet as REST server?",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Weka2015-Projects/feline-bling.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Weka2015-Projects/feline-bling/issues"
+  },
+  "homepage": "https://github.com/Weka2015-Projects/feline-bling/",
+  "dependencies": {
+    "jsonfile": "^2.2.3",
+    "koa": "^1.1.2",
+    "koa-better-body": "^1.0.17",
+    "koa-router": "^5.3.0",
+    "ramda": "^0.18.0"
+  },
+  "devDependencies": {
+    "chai": "^3.4.1",
+    "co-mocha": "^1.1.2",
+    "co-supertest": "0.0.10",
+    "fs-extra": "^0.26.2",
+    "mocha": "^2.3.4",
+    "supertest": "^1.1.0"
+  }
+}
