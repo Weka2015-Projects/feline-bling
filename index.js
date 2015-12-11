@@ -35,13 +35,11 @@ router.get('/cats', function *(next) {
   this.set('Content-Type', 'application/json')
 })
 
-
-
 // get cats by ID
 router.get('/cats/:id', function *(next) {
   const json = JSON.parse(fs.readFileSync('./db.json').toString())
 
-  const cat = R.filter((cat) => parseInt(cat.id) === parseInt(this.params.id), json.cats)
+  const cat = R.filter((cat) => parseInt(cat.id) === parseInt(this.params.id), json.cats)[0]
 
   this.set('Content-Type', 'application/json')
   this.body = cat
@@ -54,9 +52,18 @@ router.post('/cats', function *(next) {
 })
 
 router.patch('/cats/:id', function *(next) {
+  const json = JSON.parse(fs.readFileSync('./db.json').toString())
+  const catPatch = this.request.body.fields
+  const cat = R.filter((cat) => parseInt(cat.id) === parseInt(this.params.id), json.cats)[0]
 
-
-
+  R.forEach(
+    (key) => cat[key] = catPatch[key],
+    R.keys(catPatch)
+  )
+  
+  this.set('Content-Type', 'application/json')
+  this.body = cat
+  this.status = 200
 })
 
 router.delete('/cats/:id', function *(next) {
