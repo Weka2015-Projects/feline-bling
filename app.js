@@ -19,7 +19,7 @@ app.use(koaBody({
 }))
 
 router.get('/', function *(next) {
-  console.log('I hate cats')
+  console.log('I wuv cats')
 })
 
 
@@ -37,7 +37,7 @@ router.get('/cats/:id', function *(next) {
   const cat = R.filter((cat) => parseInt(cat.id) === parseInt(this.params.id), json.cats)[0]
   this.set('Content-Type', 'application/json')
   this.body = cat
-  this.status = 200
+  this.status = typeof cat === 'undefined' ? 404 : 200
 })
 
 
@@ -49,7 +49,8 @@ router.post('/cats', function *(next) {
   this.set('Content-Type', 'application/json')
   this.body = cat
   this.status = 201
-  fs.writeFileSync('./db.json', JSON.stringify(json))
+  fs.writeFileSync(app.DB_FILENAME
+, JSON.stringify(json))
 
 })
 
@@ -66,7 +67,8 @@ router.patch('/cats/:id', function *(next) {
   this.set('Content-Type', 'application/json')
   this.body = cat
   this.status = 200
-  fs.writeFileSync('./db.json', JSON.stringify(json))
+  fs.writeFileSync(app.DB_FILENAME
+, JSON.stringify(json))
 
 })
 
@@ -78,7 +80,8 @@ router.delete('/cats/:id', function *(next) {
   this.set('Content-Type', 'application/json')
   this.body = json.cats
   this.status = 204
-  fs.writeFileSync('./db.json', JSON.stringify(json))
+  fs.writeFileSync(app.DB_FILENAME
+, JSON.stringify(json))
 })
 
 app.use(router.routes())

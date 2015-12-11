@@ -31,10 +31,10 @@ describe('API catpoints', () => {
 
   describe('POST /cats', () => {
     it('returns 201 if move was successful', function *(){
-      yield request.post('/cats').expect(201).end()
+      yield request.post('/cats').send({"name" : "bro"}).expect(201).end()
     })
-    it('last cat in database is equal to cat posted', function *(){
-      yield request.post('/cats').expect(201).end()
+    it('Database is one longer', function *(){
+      yield request.post('/cats').send({"name" : "bro"})
       let res = yield request.get('/cats').end()
       expect(res.body.length).to.equal(6)
     })
@@ -42,9 +42,12 @@ describe('API catpoints', () => {
 
   describe('PATCH /cats/:id', () => {
     it('returns 200 if patched', function *(){
-      yield request.patch('/cats/1').expect(200).end()
+      yield request.patch('/cats/1').send({"name" : "bungalo billsephony"}).expect(200).end()
     })
     it('returns cat with new property', function *(){
+      yield request.patch('/cats/1').send({"name" : "bungalo billsephony"})
+      let res = yield request.get('/cats/1').end()
+      expect(res.body.name).to.equal('bungalo billsephony')
     })
   })
 
@@ -53,9 +56,8 @@ describe('API catpoints', () => {
       yield request.del('/cats/1').expect(204).end()
     })
     it('returns 404 if cat is deleted', function *(){
-      yield request.del('/cats/1').expect(404).end()
-      let res = yield request.get('/cats').end()
-      expect(res.body.length).to.equal(4)
+      yield request.del('/cats/1')
+      yield request.get('/cats/1').expect(404).end()
     })
   })
 })
