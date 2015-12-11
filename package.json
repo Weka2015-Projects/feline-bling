@@ -4,7 +4,7 @@
   "description": "Hey, remember [json-server](https://github.com/typicode/json-server), that lovely little app that converts a simple `db.json` file into a sweet as REST server?",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --harmony test"
   },
   "repository": {
     "type": "git",
