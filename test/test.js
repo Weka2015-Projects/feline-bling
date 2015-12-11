@@ -5,6 +5,7 @@ const app = require('../app')
 const request = require('co-supertest').agent(app.listen())
 const expect = require('chai').expect
 require ('co-mocha')
+app.DB_FILENAME = './test/db.json'
 
 describe('API catpoints', () => {
   beforeEach(() => (loadDb('fixtures')) )
