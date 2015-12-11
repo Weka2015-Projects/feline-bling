@@ -80,3 +80,5 @@ router.delete('/cats/:id', function *(next) {
   this.status = 204
   fs.writeFileSync('./db.json', JSON.stringify(json))
 })
+
+app.use(router.routes())
