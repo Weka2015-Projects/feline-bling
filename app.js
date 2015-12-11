@@ -82,3 +82,5 @@ router.delete('/cats/:id', function *(next) {
 })
 
 app.use(router.routes())
+
+module.exports = app
