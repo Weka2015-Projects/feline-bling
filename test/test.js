@@ -1,15 +1,15 @@
 'use strict'
 
+const loadDb = require('./helpers/load-db')
 const app = require('../index')
 const request = require('co-supertest').agent(app.listen())
 const expect = require('chai').expect
 require ('co-mocha')
 
 describe('API catpoints', () => {
-
+  beforeEach(() => (loadDb('fixtures')) )
   describe('GET /cats', () => {
-    before(() => ('cats') )
-    xit('returns 200', function *() {
+    it('returns 200', function *() {
       yield request.get('/cats').expect(200).end()
     })
     xit('returns all cats', function *(){
