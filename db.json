@@ -1,1 +1,34 @@
-{"cats":[{"name":"barbados jones","age":5,"lives":9,"id":1},{"name":"jimbo fisher","age":7,"lives":8,"id":2},{"name":"unclasdasdasd rico","age":8,"lives":7,"id":3},{"name":"woll smoth","age":3,"lives":9,"id":4},{"name":"uncle rico","age":2,"lives":5,"id":5}]}
+{
+  "cats": [
+    {
+      "name": "barbados jones",
+      "age": 5,
+      "lives": 9,
+      "id": 1
+    },
+    {
+      "name": "jimbo fisher",
+      "age": 7,
+      "lives": 8,
+      "id": 2
+    },
+    {
+      "name": "gonzo mcgee",
+      "age": 8,
+      "lives": 7,
+      "id": 3
+    },
+    {
+      "name": "woll smoth",
+      "age": 3,
+      "lives": 9,
+      "id": 4
+    },
+    {
+      "name": "uncle rico",
+      "age": 2,
+      "lives": 5,
+      "id": 5
+    }
+  ]
+}
