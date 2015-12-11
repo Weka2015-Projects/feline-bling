@@ -19,23 +19,66 @@ app.use(koaBody({
 }))
 
 router.get('/', function *(next) {
+  console.log('I hate cats')
+})
+
+
+// get all the cats
+router.get('/cats', function *(next) {
+  const json = JSON.parse(fs.readFileSync('./db.json').toString())
+  this.set('Content-Type', 'application/json')
+  this.body = json.cats
+  this.status = 200
+})
+
+// get cats by ID
+router.get('/cats/:id', function *(next) {
+  const json = JSON.parse(fs.readFileSync('./db.json').toString())
+  const cat = R.filter((cat) => parseInt(cat.id) === parseInt(this.params.id), json.cats)[0]
+  this.set('Content-Type', 'application/json')
+  this.body = cat
+  this.status = 200
+})
+
+
+router.post('/cats', function *(next) {
+  const json = JSON.parse(fs.readFileSync('./db.json').toString())
+  const cat = this.request.body.fields
+  cat['id'] = R.last(json.cats).id + 1
+  json.cats.push(cat)
+  this.set('Content-Type', 'application/json')
+  this.body = cat
+  this.status = 201
+  fs.writeFileSync('./db.json', JSON.stringify(json))
 
 })
 
-router.get('/moves', function *(next) {
+router.patch('/cats/:id', function *(next) {
+  const json = JSON.parse(fs.readFileSync('./db.json').toString())
+  const catPatch = this.request.body.fields
+  const cat = R.filter((cat) => parseInt(cat.id) === parseInt(this.params.id), json.cats)[0]
+  const currentIndex = R.indexOf(cat, json.cats)
+  R.forEach(
+    (key) => cat[key] = catPatch[key],
+    R.keys(catPatch)
+  )
+  json.cats[currentIndex] = cat
+  this.set('Content-Type', 'application/json')
+  this.body = cat
+  this.status = 200
+  fs.writeFileSync('./db.json', JSON.stringify(json))
 
 })
 
-router.post('/moves', function *(next) {
-
-})
-
-router.patch('/moves/:id', function *(next) {
-
-})
-
-router.delete('/moves/:id', function *(next) {
-
+router.delete('/cats/:id', function *(next) {
+  const json = JSON.parse(fs.readFileSync('./db.json').toString())
+  const cat = R.filter((cat) => parseInt(cat.id) === parseInt(this.params.id), json.cats)[0]
+  const remove = R.indexOf(cat, json.cats)
+  json.cats = R.remove(remove, 1, json.cats)
+  this.set('Content-Type', 'application/json')
+  this.body = json.cats
+  this.status = 204
+  fs.writeFileSync('./db.json', JSON.stringify(json))
 })
 
 app.use(router.routes())
