@@ -1,43 +1,8 @@
 'use strict'
 
-const koa = require('koa')
-const R = require('ramda')
-const koaBody = require('koa-better-body')
-const router = require('koa-router')()
-const thunkify = require('thunkify-wrap')
-const fs = require('fs')
-const app = koa()
+const app = require('./app')
+app.DB_FILENAME = './db.json'
 
-fs.readFile = thunkify(fs.readFile)
 
-app.use(koaBody({
-  extendTypes: {
-    // will parse application/x-javascript type body as a JSON string
-    json: ['application/x-javascript'],
-    multipart: ['multipart/mixed']
-  }
-}))
 
-router.get('/', function *(next) {
-
-})
-
-router.get('/moves', function *(next) {
-
-})
-
-router.post('/moves', function *(next) {
-
-})
-
-router.patch('/moves/:id', function *(next) {
-
-})
-
-router.delete('/moves/:id', function *(next) {
-  
-})
-
-app.use(router.routes())
-
-app.listen(4000, () => console.log('Listening on port 4000.'))
+app.listen(4000, () => console.log("Listening on port 4000."))
