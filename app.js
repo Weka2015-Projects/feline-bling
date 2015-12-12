@@ -22,7 +22,6 @@ router.get('/', function *(next) {
   console.log('I wuv cats')
 })
 
-
 // get all the cats
 router.get('/cats', function *(next) {
   const json = JSON.parse(fs.readFileSync(app.DB_FILENAME).toString())
@@ -40,7 +39,6 @@ router.get('/cats/:id', function *(next) {
   this.status = typeof cat === 'undefined' ? 404 : 200
 })
 
-
 router.post('/cats', function *(next) {
   const json = JSON.parse(fs.readFileSync(app.DB_FILENAME).toString())
   const cat = this.request.body.fields
@@ -51,7 +49,6 @@ router.post('/cats', function *(next) {
   this.status = 201
   fs.writeFileSync(app.DB_FILENAME
 , JSON.stringify(json))
-
 })
 
 router.patch('/cats/:id', function *(next) {
@@ -69,7 +66,6 @@ router.patch('/cats/:id', function *(next) {
   this.status = 200
   fs.writeFileSync(app.DB_FILENAME
 , JSON.stringify(json))
-
 })
 
 router.delete('/cats/:id', function *(next) {
