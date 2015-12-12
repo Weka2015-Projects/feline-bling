@@ -34,9 +34,17 @@ router.get('/cats', function *(next) {
 router.get('/cats/:id', function *(next) {
   const json = JSON.parse(fs.readFileSync(app.DB_FILENAME).toString())
   const cat = R.filter((cat) => parseInt(cat.id) === parseInt(this.params.id), json.cats)[0]
+  const currentIndex = R.indexOf(cat, json.cats)
+  console.log(json.cats)
   this.set('Content-Type', 'application/json')
   this.body = cat
   this.status = typeof cat === 'undefined' ? 404 : 200
+  json.cats[currentIndex].lives--
+  if (json.cats[currentIndex].lives === 0) {
+      json.cats = R.remove(currentIndex, 1, json.cats)
+  }
+  fs.writeFileSync(app.DB_FILENAME
+  , JSON.stringify(json))
 })
 
 router.post('/cats', function *(next) {
